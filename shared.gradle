@@ -1,0 +1,69 @@
+// shared.gradle — applied by each version subproject after loom is loaded
+// Note: sourceSets are NOT configured here; each subproject defines its own.
+
+version = rootProject.mod_version
+group = rootProject.maven_group
+
+base {
+	archivesName = "${rootProject.archives_base_name}-${project.name}"
+}
+
+repositories {
+	maven {
+		name = "shedaniel"
+		url = "https://maven.shedaniel.me/"
+	}
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	// Subproject fabric.mod.json takes priority over anything in common/
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	filesMatching("fabric.mod.json") {
+		expand "version": inputs.properties.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+	inputs.property "archivesName", project.base.archivesName
+
+	from("${rootProject.projectDir}/LICENSE") {
+		rename { "${it}_${inputs.properties.archivesName}" }
+	}
+}
+
+tasks.named("sourcesJar") {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.base.archivesName.get()
+			from components.java
+		}
+	}
+}

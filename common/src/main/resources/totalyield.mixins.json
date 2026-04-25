@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.armaninyow.totalyield.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"CraftingScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

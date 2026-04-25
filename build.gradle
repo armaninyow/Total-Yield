@@ -1,0 +1,2 @@
+// Root build.gradle — subproject-specific build files handle all configuration.
+// Shared settings are applied via each subproject's build.gradle using apply from.
