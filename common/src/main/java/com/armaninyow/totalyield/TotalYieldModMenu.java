@@ -2,12 +2,12 @@ package com.armaninyow.totalyield;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.CyclingListControllerBuilder;
+import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.minecraft.network.chat.Component;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class TotalYieldModMenu implements ModMenuApi {
 
@@ -16,65 +16,68 @@ public class TotalYieldModMenu implements ModMenuApi {
         return parent -> {
             TotalYieldConfig cfg = TotalYieldConfig.get();
 
-            ConfigBuilder builder = ConfigBuilder.create()
-                    .setParentScreen(parent)
-                    .setTitle(Component.translatable("totalyield.config.title"))
-                    .setSavingRunnable(TotalYieldConfig::save);
+            return YetAnotherConfigLib.createBuilder()
+                    .title(Component.translatable("totalyield.config.title"))
+                    .category(ConfigCategory.createBuilder()
+                            .name(Component.translatable("totalyield.config.category.general"))
 
-            ConfigEntryBuilder entries = builder.entryBuilder();
-            ConfigCategory general = builder.getOrCreateCategory(
-                    Component.translatable("totalyield.config.category.general"));
+                            // ── Default display ────────────────────────────────────────────
+                            .option(Option.<TotalYieldConfig.DefaultDisplay>createBuilder()
+                                    .name(Component.translatable("totalyield.config.default_display"))
+                                    .description(OptionDescription.of(
+                                            Component.translatable("totalyield.config.default_display.tooltip")))
+                                    .binding(TotalYieldConfig.DefaultDisplay.VANILLA,
+                                            () -> cfg.defaultDisplay,
+                                            v -> cfg.defaultDisplay = v)
+                                    .controller(opt -> CyclingListControllerBuilder.create(opt)
+                                            .values(List.of(TotalYieldConfig.DefaultDisplay.values()))
+                                            .formatValue(v -> Component.translatable(
+                                                    "totalyield.config.default_display." + v.name().toLowerCase())))
+                                    .build())
 
-            // ── Default display ────────────────────────────────────────────
-            general.addEntry(entries
-                    .startEnumSelector(
-                            Component.translatable("totalyield.config.default_display"),
-                            TotalYieldConfig.DefaultDisplay.class,
-                            cfg.defaultDisplay)
-                    .setDefaultValue(TotalYieldConfig.DefaultDisplay.VANILLA)
-                    .setTooltip(Component.translatable("totalyield.config.default_display.tooltip"))
-                    .setEnumNameProvider(e -> Component.translatable(
-                            "totalyield.config.default_display." + e.name().toLowerCase()))
-                    .setSaveConsumer(v -> cfg.defaultDisplay = v)
-                    .build());
+                            // ── Shift display ──────────────────────────────────────────────
+                            .option(Option.<TotalYieldConfig.ShiftDisplay>createBuilder()
+                                    .name(Component.translatable("totalyield.config.shift_display"))
+                                    .description(OptionDescription.of(
+                                            Component.translatable("totalyield.config.shift_display.tooltip")))
+                                    .binding(TotalYieldConfig.ShiftDisplay.EXACT,
+                                            () -> cfg.shiftDisplay,
+                                            v -> cfg.shiftDisplay = v)
+                                    .controller(opt -> CyclingListControllerBuilder.create(opt)
+                                            .values(List.of(TotalYieldConfig.ShiftDisplay.values()))
+                                            .formatValue(v -> Component.translatable(
+                                                    "totalyield.config.shift_display." + v.name().toLowerCase())))
+                                    .build())
 
-            // ── Shift display ──────────────────────────────────────────────
-            general.addEntry(entries
-                    .startEnumSelector(
-                            Component.translatable("totalyield.config.shift_display"),
-                            TotalYieldConfig.ShiftDisplay.class,
-                            cfg.shiftDisplay)
-                    .setDefaultValue(TotalYieldConfig.ShiftDisplay.EXACT)
-                    .setTooltip(Component.translatable("totalyield.config.shift_display.tooltip"))
-                    .setEnumNameProvider(e -> Component.translatable(
-                            "totalyield.config.shift_display." + e.name().toLowerCase()))
-                    .setSaveConsumer(v -> cfg.shiftDisplay = v)
-                    .build());
+                            // ── Stack format ───────────────────────────────────────────────
+                            .option(Option.<TotalYieldConfig.StackFormat>createBuilder()
+                                    .name(Component.translatable("totalyield.config.stack_format"))
+                                    .description(OptionDescription.of(
+                                            Component.translatable("totalyield.config.stack_format.tooltip")))
+                                    .binding(TotalYieldConfig.StackFormat.MULTIPLIER,
+                                            () -> cfg.stackFormat,
+                                            v -> cfg.stackFormat = v)
+                                    .controller(opt -> CyclingListControllerBuilder.create(opt)
+                                            .values(List.of(TotalYieldConfig.StackFormat.values()))
+                                            .formatValue(v -> Component.translatable(
+                                                    "totalyield.config.stack_format." + v.name().toLowerCase())))
+                                    .build())
 
-            // ── Stack format ───────────────────────────────────────────────
-            general.addEntry(entries
-                    .startEnumSelector(
-                            Component.translatable("totalyield.config.stack_format"),
-                            TotalYieldConfig.StackFormat.class,
-                            cfg.stackFormat)
-                    .setDefaultValue(TotalYieldConfig.StackFormat.MULTIPLIER)
-                    .setTooltip(Component.translatable("totalyield.config.stack_format.tooltip"))
-                    .setEnumNameProvider(e -> Component.translatable(
-                            "totalyield.config.stack_format." + e.name().toLowerCase()))
-                    .setSaveConsumer(v -> cfg.stackFormat = v)
-                    .build());
+                            // ── Animation ──────────────────────────────────────────────────
+                            .option(Option.<Boolean>createBuilder()
+                                    .name(Component.translatable("totalyield.config.animation_enabled"))
+                                    .description(OptionDescription.of(
+                                            Component.translatable("totalyield.config.animation_enabled.tooltip")))
+                                    .binding(true,
+                                            () -> cfg.animationEnabled,
+                                            v -> cfg.animationEnabled = v)
+                                    .controller(TickBoxControllerBuilder::create)
+                                    .build())
 
-            // ── Animation ──────────────────────────────────────────────────
-            general.addEntry(entries
-                    .startBooleanToggle(
-                            Component.translatable("totalyield.config.animation_enabled"),
-                            cfg.animationEnabled)
-                    .setDefaultValue(true)
-                    .setTooltip(Component.translatable("totalyield.config.animation_enabled.tooltip"))
-                    .setSaveConsumer(v -> cfg.animationEnabled = v)
-                    .build());
-
-            return builder.build();
+                            .build())
+                    .save(TotalYieldConfig::save)
+                    .build()
+                    .generateScreen(parent);
         };
     }
 }

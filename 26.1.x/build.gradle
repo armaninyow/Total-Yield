@@ -1,0 +1,23 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+apply from: rootProject.file('shared.gradle')
+
+sourceSets {
+	main {
+		java {
+			srcDirs = [
+				file('src/main/java'),
+				rootProject.file('common/src/main/java')
+			]
+		}
+		resources {
+			srcDirs = [
+				file('src/main/resources'),
+				rootProject.file('common/src/main/resources')
+			]
+		}
+	}
+}

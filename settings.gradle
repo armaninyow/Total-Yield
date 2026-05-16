@@ -9,6 +9,4 @@ pluginManagement {
 	}
 }
 
-include '1.21_1.21.5'
-include '1.21.6_1.21.10'
-include '1.21.11'
+include '26.1.x'

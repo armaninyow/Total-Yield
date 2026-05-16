@@ -3,20 +3,20 @@
   "totalyield.config.category.general": "General",
 
   "totalyield.config.default_display": "Default Display",
-  "totalyield.config.default_display.tooltip": "What to show on the crafting result slot normally.\n \nVANILLA: Do not show anything extra. The slot looks exactly as it does without this mod.\nEXACT: Show the total number of items you can craft with your current ingredients.\nSTACKS: Show the total as a stack expression using your chosen format.",
+  "totalyield.config.default_display.tooltip": "What to show on the crafting result slot normally.\n\nVANILLA:\nDo not show anything extra. The slot looks exactly as it does without this mod.\n\nEXACT:\nShow the total number of items you can craft with your current ingredients.\n\nSTACKS:\nShow the total as a stack expression using your chosen format.",
 
   "totalyield.config.default_display.vanilla": "VANILLA",
   "totalyield.config.default_display.exact": "EXACT",
   "totalyield.config.default_display.stacks": "STACKS",
 
   "totalyield.config.shift_display": "Shift Display",
-  "totalyield.config.shift_display.tooltip": "What to show on the crafting result slot while Shift is held.\nThis always overrides the Default Display setting when Shift is held.\n \nEXACT: Show the total number of items you can craft.\nSTACKS: Show the total as a stack expression using your chosen format.",
+  "totalyield.config.shift_display.tooltip": "What to show on the crafting result slot while Shift is held. This always overrides the Default Display setting when Shift is held.\n\nEXACT:\nShow the total number of items you can craft.\n\nSTACKS:\nShow the total as a stack expression using your chosen format.",
 
   "totalyield.config.shift_display.exact": "EXACT",
   "totalyield.config.shift_display.stacks": "STACKS",
 
   "totalyield.config.stack_format": "Stack Format",
-  "totalyield.config.stack_format.tooltip": "The format used when the display mode is set to STACKS.\n \nMULTIPLIER: Shows stacks using x as a separator.\nSHORTHAND: Shows stacks using s as a suffix.\nGROUPED: Shows stacks with the stack size in parentheses.",
+  "totalyield.config.stack_format.tooltip": "The format used when the display mode is set to STACKS.\n\nMULTIPLIER:\nShows stacks using x as a separator.\n\nSHORTHAND:\nShows stacks using s as a suffix.\n\nGROUPED:\nShows stacks with the stack size in parentheses.",
 
   "totalyield.config.stack_format.multiplier": "MULTIPLIER",
   "totalyield.config.stack_format.shorthand": "SHORTHAND",
