@@ -1,0 +1,30 @@
+body:
+  - type: dropdown
+    id: version
+    attributes:
+      label: Minecraft Version
+      description: Please select the Minecraft game version where you are experiencing this issue.
+      options:
+        - "1.21.11"
+        - "1.21.10"
+        - "1.21.9"
+        - "1.21.8"
+        - "1.21.7"
+        - "1.21.6"
+        - "1.21.5"
+        - "1.21.4"
+        - "1.21.3"
+        - "1.21.2"
+        - "1.21.1"
+        - "1.21"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a detailed description of the issue you are experiencing.
+      placeholder: What happened? What were you doing when the bug occurred?
+    validations:
+      required: true
