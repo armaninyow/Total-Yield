@@ -5,6 +5,7 @@ body:
       label: Minecraft Version
       description: Please select the Minecraft game version where you are experiencing this issue.
       options:
+        - "26.2"
         - "26.1.2"
         - "26.1.1"
         - "26.1"
