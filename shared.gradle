@@ -1,6 +1,3 @@
-// shared.gradle — applied by each version subproject after loom is loaded
-// Note: sourceSets are NOT configured here; each subproject defines its own.
-
 version = rootProject.mod_version
 group = rootProject.maven_group
 
@@ -32,7 +29,6 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	// Subproject fabric.mod.json takes priority over anything in common/
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
 	filesMatching("fabric.mod.json") {

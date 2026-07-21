@@ -21,7 +21,6 @@ public class TotalYieldModMenu implements ModMenuApi {
                     .category(ConfigCategory.createBuilder()
                             .name(Component.translatable("totalyield.config.category.general"))
 
-                            // ── Default display ────────────────────────────────────────────
                             .option(Option.<TotalYieldConfig.DefaultDisplay>createBuilder()
                                     .name(Component.translatable("totalyield.config.default_display"))
                                     .description(OptionDescription.of(
@@ -35,7 +34,6 @@ public class TotalYieldModMenu implements ModMenuApi {
                                                     "totalyield.config.default_display." + v.name().toLowerCase())))
                                     .build())
 
-                            // ── Shift display ──────────────────────────────────────────────
                             .option(Option.<TotalYieldConfig.ShiftDisplay>createBuilder()
                                     .name(Component.translatable("totalyield.config.shift_display"))
                                     .description(OptionDescription.of(
@@ -49,7 +47,6 @@ public class TotalYieldModMenu implements ModMenuApi {
                                                     "totalyield.config.shift_display." + v.name().toLowerCase())))
                                     .build())
 
-                            // ── Stack format ───────────────────────────────────────────────
                             .option(Option.<TotalYieldConfig.StackFormat>createBuilder()
                                     .name(Component.translatable("totalyield.config.stack_format"))
                                     .description(OptionDescription.of(
@@ -63,7 +60,6 @@ public class TotalYieldModMenu implements ModMenuApi {
                                                     "totalyield.config.stack_format." + v.name().toLowerCase())))
                                     .build())
 
-                            // ── Animation ──────────────────────────────────────────────────
                             .option(Option.<Boolean>createBuilder()
                                     .name(Component.translatable("totalyield.config.animation_enabled"))
                                     .description(OptionDescription.of(
